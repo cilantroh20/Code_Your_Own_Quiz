@@ -62,5 +62,3 @@ def begin_quiz(quiz, spaces, answers):
 			"Thanks, BYE!"
 
 choose_level()
-
-

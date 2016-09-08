@@ -23,27 +23,44 @@ hard_song_spaces = ["_1_", "_2__", "_3_", "__4_", "__5_"]
 hard_song_answers = ["cry", "eyes", "ufo", "self", "self"]
 
 #This function will prompt the user to choose what level of they want 
+#.strip is to take out the whitespaces
 def choose_level():
 	user_in = raw_input("What level of difficulty would you like? (easy, medium, hard)")
-	if user_in == "easy":
+	if user_in.strip() == "easy":
 		begin_quiz(easy_quiz_lyrics, easy_song_spaces, easy_song_answers)
-	elif user_in == "medium":
+	elif user_in.strip() == "medium":
 		begin_quiz(medium_quiz_lyrics, medium_song_spaces, medium_song_answers)
-	elif user_in == "hard":
+	elif user_in.strip() == "hard":
 		begin_quiz(hard_quiz_lyrics, hard_song_spaces, hard_song_answers)
 	else:
-		user_in = raw_input("What level of difficulty would you like? (easy, medium, hard)")
+		user_in = raw_input("Try again! (easy, medium, hard)")
 		choose_level()
-
+		
+#this function begins the quiz and replaces the answers the user inputs
+#prevents a user from making to many mistakes
+#allows the user to choose to restart if they won or lost
 def begin_quiz(quiz, spaces, answers):
 	print quiz
 	for count_spaces in range(0, len(spaces)):
-		user_input = raw_input("What is" + spaces[count_spaces])	
-		while user_input.lower() != answers[count_spaces]:
-			user_input = raw_input("That is incorrect. What is" + spaces[count_spaces] + "?")
+		user_input = raw_input("What is" + spaces[count_spaces])
+		attempts = 0	
+		while user_input.lower().strip() != answers[count_spaces]:
+			attempts += 1
+			user_input = raw_input("That is incorrect, You're on your" + str(attempts) + "try. What is" + spaces[count_spaces] + "?")
+			if attempts == 4:
+				print ("GAME OVER!")
+				choose_level()
 		else: 
 			quiz = quiz.replace(spaces[count_spaces], answers[count_spaces])
 			print("That is correct!" + quiz)
-			
+	if len(spaces) == len(answers):
+		print ("CONGRATS!! YOU MADE IT!!")
+		user_input= raw_input("Would like to play again? YES/NO")
+		if user_input.lower().strip() == "yes": 
+			choose_level()
+		else:
+			"Thanks, BYE!"
 
 choose_level()
+
+

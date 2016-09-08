@@ -40,7 +40,8 @@ def choose_level():
 #prevents a user from making to many mistakes
 #allows the user to choose to restart if they won or lost
 #the input parameters are pre-defined in the choose_level() function
-#they take a string, and two lists that are held by variables for each level of the quiz
+#they take a string of lyrics for each three levels(easy,medium,hard)
+#they take two lists, which arespaces and answers for each level
 def begin_quiz(quiz, spaces, answers):
 	print quiz
 	for count_spaces in range(0, len(spaces)):

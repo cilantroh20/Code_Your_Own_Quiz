@@ -39,15 +39,18 @@ def choose_level():
 #this function begins the quiz and replaces the answers the user inputs
 #prevents a user from making to many mistakes
 #allows the user to choose to restart if they won or lost
+#the input parameters are pre-defined in the choose_level() function
+#they take a string, and two lists that are held by variables for each level of the quiz
 def begin_quiz(quiz, spaces, answers):
 	print quiz
 	for count_spaces in range(0, len(spaces)):
 		user_input = raw_input("What is" + spaces[count_spaces])
-		attempts = 0	
+		attempts = 0
+		max_attempts = 4	
 		while user_input.lower().strip() != answers[count_spaces]:
 			attempts += 1
 			user_input = raw_input("That is incorrect, You're on your" + str(attempts) + "try. What is" + spaces[count_spaces] + "?")
-			if attempts == 4:
+			if attempts == max_attempts:
 				print ("GAME OVER!")
 				choose_level()
 		else: 
